@@ -103,15 +103,15 @@ run: ## execute a notebook end-to-end: make run NB=RoPE/rope.ipynb
 
 .PHONY: fmt
 fmt: ## format code with ruff
-	$(UV) run ruff format .
+	$(PY) -m ruff format .
 
 .PHONY: lint
 lint: ## lint code with ruff
-	$(UV) run ruff check .
+	$(PY) -m ruff check .
 
 .PHONY: test
 test: ## run pytest
-	$(UV) run pytest -q
+	$(PY) -m pytest -q
 
 .PHONY: info
 info: ## print environment / hardware summary

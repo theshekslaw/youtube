@@ -41,6 +41,17 @@ dev = [
 # keep the venv inside this folder so every paper subproject shares one env
 package = false
 
+# Pull torch from the CUDA channel, not PyPI. Without this, PyPI's CPU-only wheel wins
+# resolution and every `uv sync` / `uv run` silently reverts a manually installed CUDA
+# build. Change cu130 to match your driver, or point at .../whl/cpu for a CPU-only box.
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130" }]
+
 [tool.ruff]
 line-length = 100
 target-version = "py311"
